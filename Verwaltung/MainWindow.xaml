@@ -29,8 +29,9 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border BorderThickness="0"
-                                Background="{StaticResource AppBrushColorBlue}">
-
+                                Background="{StaticResource AppBrushColorBlue}"
+                                CornerRadius="10">
+                                        
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
@@ -118,14 +119,16 @@
             <Grid HorizontalAlignment="Right" Panel.ZIndex="1" 
       Background="{StaticResource AppBrushColorBlue}">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Cursor="Hand">
-                    <Button Name="BtnWindowMinimize">
+                    <Button Name="BtnWindowMinimize"
+                            Style="{StaticResource BtnMinCloseStyle}">
                         <MD:PackIcon Kind="WindowMinimize" Width="24" Height="24"/>
                     </Button>
 
                     <ToggleButton Name="TglBtnWindowNormalMax" Margin="8 0">
                     </ToggleButton>
 
-                    <Button Name="BtnWindowClose">
+                    <Button Name="BtnWindowClose"
+                            Style="{StaticResource BtnMinCloseStyle}">
                         <MD:PackIcon Kind="WindowClose" Width="24" Height="24"/>
                     </Button>
                 </StackPanel>

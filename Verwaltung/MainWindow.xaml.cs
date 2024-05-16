@@ -1,4 +1,5 @@
-﻿using MahApps.Metro.Controls;
+﻿using ControlzEx.Theming;
+using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using System.Windows;
 using System.Windows.Controls;
@@ -15,6 +16,7 @@ namespace Verwaltung
         public MainWindow()
         {
             InitializeComponent();
+            ThemeManager.Current.ChangeTheme (this, "Light.Red");
         }
 
         private async void BtnMinMaxResOnClick(object sender, RoutedEventArgs e)
@@ -35,7 +37,8 @@ namespace Verwaltung
                         AffirmativeButtonText = "JA",
                         NegativeButtonText = "NEIN",
                         AnimateShow = true,
-                        AnimateHide = true
+                        AnimateHide = true,
+                        //ColorScheme = MetroDialogColorScheme.Accented,
                     };
 
                     var result = await this.ShowMessageAsync("ACHTUNG", "Wollen Sie wirklich die Anwendung beenden?",
@@ -79,5 +82,26 @@ namespace Verwaltung
 
 
         }
+
+        private void TglBtnMenuOpenClose_Checked(object sender, RoutedEventArgs e)
+        {
+            OpenCloseFlyout(0);
+        }
+
+        private void OpenCloseFlyout(int iFlyoutIndex)
+        {
+            try
+            {
+                var flyout = this.Flyouts.Items[iFlyoutIndex] as Flyout;
+                if (flyout is null) return;
+
+                flyout.IsOpen = !flyout.IsOpen;
+            }
+            catch (Exception)
+            {
+                // Handle exception
+            }
+        }
+
     }
 }

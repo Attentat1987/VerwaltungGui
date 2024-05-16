@@ -9,10 +9,10 @@
                 xmlns:MD="http://materialdesigninxaml.net/winfx/xaml/themes"
                 Height="650" MinHeight="650"
                 Width="1200" MinWidth="1200"
-                SnapsToDevicePixels="True"
-                UseLayoutRounding="True"
+                SnapsToDevicePixels="False"
+                UseLayoutRounding="False"
                 WindowTitleBrush="{StaticResource AppBrushColorCyan}"
-                TitleBarHeight="20"
+                TitleBarHeight="1"
                 WindowStartupLocation="CenterScreen"
                 ShowCloseButton="False"
                 ShowMaxRestoreButton="False"
@@ -108,10 +108,11 @@
             </Grid>
 
             <!-- App Name -->
-            <Grid HorizontalAlignment="Stretch" 
+            <Grid HorizontalAlignment="Stretch"
                   Panel.ZIndex="0"
                   Cursor="Hand"
-                  Background="{StaticResource AppBrushColorBlue}">
+                  Background="{StaticResource AppBrushColorBlue}"
+                   PreviewMouseLeftButtonDown="Grid_PreviewMouseMove">
                 <TextBlock Text="Verwaltung" 
                            FontSize="35" 
                            VerticalAlignment="Center" 
@@ -125,12 +126,15 @@
             <Grid HorizontalAlignment="Right" Panel.ZIndex="1" 
                   Background="{StaticResource AppBrushColorBlue}">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Cursor="Hand">
-                    <Button Name="BtnWindowMinimize" Foreground="GreenYellow"
-                            Style="{StaticResource BtnMinCloseStyle}">
+                    <Button Name="BtnWindowMinimize" 
+                            Foreground="GreenYellow"
+                            Style="{StaticResource BtnMinCloseStyle}" 
+                            Click="BtnMinMaxResOnClick">
                         <MD:PackIcon Kind="WindowMinimize" Width="24" Height="24" />
                     </Button>
 
-                    <ToggleButton Name="TglBtnWindowNormalMax" Margin="8 0">
+                    <ToggleButton Name="TglBtnWindowNormalMax" 
+                                  Click="BtnMinMaxResOnClick">
                         <ToggleButton.Style>
                             <Style TargetType="ToggleButton">
                                 <Setter Property="Foreground" Value="{StaticResource AppBrushColorCyan}" />
@@ -162,12 +166,6 @@
                                                     <Setter TargetName="PIMax" Property="Visibility" Value="Collapsed"/>
                                                     <Setter TargetName="PIRes" Property="Visibility" Value="Visible"/>
                                                 </Trigger>
-
-                                                <Trigger Property="IsChecked" Value="True">
-                                                    <Setter TargetName="TBorder" Property="Background" Value="White"/>
-
-                                                </Trigger>
-
                                             </ControlTemplate.Triggers>
                                         </ControlTemplate>
                                     </Setter.Value>
@@ -177,7 +175,8 @@
                     </ToggleButton>
 
                     <Button Name="BtnWindowClose" Foreground="DarkRed"
-                            Style="{StaticResource BtnMinCloseStyle}">
+                            Style="{StaticResource BtnMinCloseStyle}"
+                            Click="BtnMinMaxResOnClick">
                         <MD:PackIcon Kind="WindowClose" 
                                      Width="24" Height="24"/>
                     </Button>

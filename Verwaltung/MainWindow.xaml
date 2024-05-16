@@ -63,13 +63,13 @@
         <MW:FlyoutsControl Background="{StaticResource AppBrushColorBlue}">
             
             <!--Menu Flayout-->
-            <MW:Flyout  Name="MenuFlyout" Margin="0 50 0 0"
+            <MW:Flyout  Name="MenuFlyout" Margin="0 60 0 0"
                         
                         CloseButtonVisibility="Collapsed"
                         Position="Left">
                 <Grid >
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="400"/>
+                        <ColumnDefinition Width="200"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
@@ -88,9 +88,9 @@
 
                             <ListView Name="MainMenuListView"
                                       ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                                      ScrollViewer.VerticalScrollBarVisibility="Disabled">      
+                                      ScrollViewer.VerticalScrollBarVisibility="Disabled">
 
-                                <ListViewItem Name="ListViewHome" Height="50">
+                                <ListViewItem Name="ListViewHome" Height="50" Margin="4 0 0 0">
                                     <ListViewItem.RenderTransform>
                                         <TranslateTransform x:Name="HameTranslateTransfor"/>
                                     </ListViewItem.RenderTransform>

@@ -19,8 +19,9 @@
                 ShowMinButton="False"
                 ResizeMode="CanResizeWithGrip">
 
-    <Window.Resources>
+    <MW:MetroWindow.Resources>
         <Style x:Key="BtnMinCloseStyle" TargetType="Button">
+            <Setter Property="Margin" Value="0 2"/>
             <Setter Property="Height" Value="26"/>
             <Setter Property="Width" Value="26"/>
             <Setter Property="BorderThickness" Value="0"/>
@@ -31,13 +32,25 @@
                         <Border BorderThickness="0"
                                 Background="{StaticResource AppBrushColorBlue}"
                                 CornerRadius="10">
-                                        
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Setter Property="Background" Value="{StaticResource AppBrushColorBlue}"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="White"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                            <ContentPresenter 
+                                HorizontalAlignment="Center" 
+                                VerticalAlignment="Center" />
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
-    </Window.Resources>
+    </MW:MetroWindow.Resources>
 
     <Grid Background="{StaticResource AppBrushColorBlue}">
         <Grid.RowDefinitions>
@@ -46,7 +59,7 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
-            <!--Menu Button-->
+            <!-- Menu Button -->
             <Grid HorizontalAlignment="Left" 
                   Panel.ZIndex="1"
                   Width="50" 
@@ -58,38 +71,104 @@
                                 <Setter Property="Foreground" Value="{StaticResource AppBrushColorCyan}" />
                                 <Setter Property="Height" Value="36" />
                                 <Setter Property="Width" Value="36" />
-                                <Setter Property="Margin" Value="8 0 0 0 " />
+                                <Setter Property="Margin" Value="8 0 0 0" />
                                 <Setter Property="Cursor" Value="Hand" />
                                 <Setter Property="Template">
                                     <Setter.Value>
                                         <ControlTemplate TargetType="ToggleButton">
                                             <Border BorderThickness="1"
-                                                             BorderBrush="{StaticResource AppBrushColorCyan}"
-                                                             CornerRadius="6"
-                                                             Background="{StaticResource AppBrushColorBlue}">
+                                                    BorderBrush="{StaticResource AppBrushColorCyan}"
+                                                    CornerRadius="6"
+                                                    Background="{StaticResource AppBrushColorBlue}">
                                                 <Grid HorizontalAlignment="Stretch"
                                                       VerticalAlignment="Stretch">
                                                     <MD:PackIcon Name="PIOpen" Kind="Menu"
                                                                  Width="34" Height="34"
                                                                  HorizontalAlignment="Stretch"
-                                                                 VerticalAlignment="Stretch"
-                                                                 />
+                                                                 VerticalAlignment="Stretch" />
                                                     <MD:PackIcon Name="PIClose" Kind="MenuClose" Visibility="Collapsed"
                                                                  Width="34" Height="34"
                                                                  HorizontalAlignment="Stretch"
-                                                                 VerticalAlignment="Stretch"
-                                                                 />     
+                                                                 VerticalAlignment="Stretch" />
                                                 </Grid>
                                             </Border>
-
                                             <ControlTemplate.Triggers>
                                                 <Trigger Property="IsChecked" Value="True">
                                                     <Setter TargetName="PIClose" Property="Visibility" Value="Visible"/>
                                                     <Setter TargetName="PIOpen" Property="Visibility" Value="Collapsed"/>
-
                                                 </Trigger>
                                             </ControlTemplate.Triggers>
-                                        
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ToggleButton.Style>
+                    </ToggleButton>
+                </StackPanel>
+            </Grid>
+
+            <!-- App Name -->
+            <Grid HorizontalAlignment="Stretch" 
+                  Panel.ZIndex="0"
+                  Cursor="Hand"
+                  Background="{StaticResource AppBrushColorBlue}">
+                <TextBlock Text="Verwaltung" 
+                           FontSize="35" 
+                           VerticalAlignment="Center" 
+                           HorizontalAlignment="Center" 
+                           Foreground="White"
+                           FontFamily="Segoe Print"
+                           FontWeight="ExtraBlack"/>
+            </Grid>
+
+            <!-- Min-Max-Close Button -->
+            <Grid HorizontalAlignment="Right" Panel.ZIndex="1" 
+                  Background="{StaticResource AppBrushColorBlue}">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Cursor="Hand">
+                    <Button Name="BtnWindowMinimize" Foreground="GreenYellow"
+                            Style="{StaticResource BtnMinCloseStyle}">
+                        <MD:PackIcon Kind="WindowMinimize" Width="24" Height="24" />
+                    </Button>
+
+                    <ToggleButton Name="TglBtnWindowNormalMax" Margin="8 0">
+                        <ToggleButton.Style>
+                            <Style TargetType="ToggleButton">
+                                <Setter Property="Foreground" Value="{StaticResource AppBrushColorCyan}" />
+                                <Setter Property="Height" Value="26" />
+                                <Setter Property="Width" Value="26" />
+                                <Setter Property="Margin" Value="8 2" />
+                                <Setter Property="Cursor" Value="Hand" />
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="ToggleButton">
+                                            <Border Name="TBorder" 
+                                                    BorderThickness="0"
+                                                    CornerRadius="28"
+                                                    Background="{StaticResource AppBrushColorBlue}">
+                                                <Grid HorizontalAlignment="Stretch"
+                                                      VerticalAlignment="Stretch">
+                                                    <MD:PackIcon Name="PIMax" Kind="WindowMaximize"
+                                                                 Width="24" Height="24"
+                                                                 HorizontalAlignment="Stretch"
+                                                                 VerticalAlignment="Stretch" />
+                                                    <MD:PackIcon Name="PIRes" Kind="WindowRestore" Visibility="Collapsed"
+                                                                 Width="24" Height="24"
+                                                                 HorizontalAlignment="Stretch"
+                                                                 VerticalAlignment="Stretch" />
+                                                </Grid>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsChecked" Value="True">
+                                                    <Setter TargetName="PIMax" Property="Visibility" Value="Collapsed"/>
+                                                    <Setter TargetName="PIRes" Property="Visibility" Value="Visible"/>
+                                                </Trigger>
+
+                                                <Trigger Property="IsChecked" Value="True">
+                                                    <Setter TargetName="TBorder" Property="Background" Value="White"/>
+
+                                                </Trigger>
+
+                                            </ControlTemplate.Triggers>
                                         </ControlTemplate>
                                     </Setter.Value>
                                 </Setter>
@@ -97,46 +176,15 @@
                         </ToggleButton.Style>
                     </ToggleButton>
 
-                </StackPanel>
-            </Grid>
-            <!--App Name-->
-            <Grid HorizontalAlignment="Stretch" 
-                  Panel.ZIndex="0"
-                  Cursor="Hand"
-                  Background="{StaticResource AppBrushColorBlue}">
-                <TextBlock Text="Verwaltung" 
-                       FontSize="35" 
-                           VerticalAlignment="Center" 
-                           HorizontalAlignment="Center" 
-                           Foreground="White"
-                           FontFamily="Segoe Print"
-                           FontWeight="ExtraBlack"/>
-                           
-            </Grid>
-
-            <!--MIN Max Close Button-->
-            <!-- Min-Max-Close-Button -->
-            <Grid HorizontalAlignment="Right" Panel.ZIndex="1" 
-      Background="{StaticResource AppBrushColorBlue}">
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Cursor="Hand">
-                    <Button Name="BtnWindowMinimize"
+                    <Button Name="BtnWindowClose" Foreground="DarkRed"
                             Style="{StaticResource BtnMinCloseStyle}">
-                        <MD:PackIcon Kind="WindowMinimize" Width="24" Height="24"/>
-                    </Button>
-
-                    <ToggleButton Name="TglBtnWindowNormalMax" Margin="8 0">
-                    </ToggleButton>
-
-                    <Button Name="BtnWindowClose"
-                            Style="{StaticResource BtnMinCloseStyle}">
-                        <MD:PackIcon Kind="WindowClose" Width="24" Height="24"/>
+                        <MD:PackIcon Kind="WindowClose" 
+                                     Width="24" Height="24"/>
                     </Button>
                 </StackPanel>
             </Grid>
-
-
-
         </Grid>
+
         <Border Grid.Row="1" 
                 BorderThickness="0 1 0 0" 
                 BorderBrush="White" 
